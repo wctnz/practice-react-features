@@ -1,3 +1,4 @@
+import { themeSlice } from './slices/themeSlice';
 import { itemSlice } from './slices/itemSlice';
 import { configureStore } from "@reduxjs/toolkit"
 import { itemsSlice } from "./slices/itemsSlice"
@@ -5,7 +6,8 @@ import { itemsSlice } from "./slices/itemsSlice"
 export const store = configureStore({
     reducer: {
         main: itemsSlice.reducer,
-        currentItem: itemSlice.reducer
+        currentItem: itemSlice.reducer,
+        theme: themeSlice.reducer
     }
 })
 

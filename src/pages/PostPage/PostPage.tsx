@@ -25,7 +25,7 @@ const PostPage = () => {
 
     return (
         loading ? <h1>Идет загрузка...</h1> :
-            < div >
+            <div className={ cl.container }>
                 <div 
                 onClick={ () => setVisible(false) }
                 className={visible ? `${cl.myModal} ${cl.active}` : `${cl.myModal}`}>

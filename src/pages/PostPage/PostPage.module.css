@@ -23,8 +23,24 @@
 }
 
 .buttonClose {
-display: flex;
-justify-content: end;
-margin-bottom: 10px;
-cursor: pointer;
+  display: flex;
+  justify-content: end;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.container {
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--background-color);
+  color: var(--color);
+}
+
+button {
+  background-color: var(--background-color);
+  color: var(--color);
+}
+
+h1 {
+  margin-top: 0px;
 }

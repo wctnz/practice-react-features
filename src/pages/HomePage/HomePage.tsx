@@ -6,6 +6,7 @@ import { itemsSlice } from '../../store/slices/itemsSlice';
 import { Item } from '../../types/types';
 import { RxCross2 } from "react-icons/rx";
 import Toogle from "../../components/toggle/Toggle"
+import cl from "./HomePage.module.css"
 
 const HomePage = () => {
 
@@ -29,8 +30,7 @@ const HomePage = () => {
     }, [page, limit, totalCount])
 
     return (
-        <div>
-            <Toogle />
+        <div className={ cl.container }>
             <div>
                 <input type="search" name="search" placeholder='Поиск...' value={search} onChange={(event) => setSearch(event.target.value)} />
             </div>
@@ -56,7 +56,7 @@ const HomePage = () => {
                                 key={item.id}
                             >
                                 {item.id}.
-                                <Link to={`/${item.id}`}>{item.title}</Link>
+                                <Link className={ cl.links } to={`/${item.id}`}>{item.title}</Link>
                                 <RxCross2
                                     className="removePostIcon"
                                     onClick={() => handlePostRemove(item.id)}
