@@ -30,39 +30,41 @@ const HomePage = () => {
     }, [page, limit, totalCount])
 
     return (
-        <div className={ cl.container }>
-            <div>
-                <input type="search" name="search" placeholder='Поиск...' value={search} onChange={(event) => setSearch(event.target.value)} />
+        <div className={cl.container}>
+            <div className={cl.topSection}>
+                <div>
+                    <input type="search" name="search" placeholder='Поиск...' value={search} onChange={(event) => setSearch(event.target.value)} />
+                </div>
+                <div>
+                    <select name="sort" value={select} onChange={(event) => setSelect(event.target.value)}>
+                        <option value="" disabled>Отсортировать по...</option>
+                        <option value="">без сортировки</option>
+                        <option value="title">Заголовку</option>
+                        <option value="body">Сообщению</option>
+                    </select>
+                </div>
+                {
+                    loading ? <h1>Идет загрузка...</h1> :
+                        error ? <h1>{error}</h1> : (
+                            items.filter(item => item.title.includes(search)).sort((a: Item, b: Item) => {
+                                const selectA = (a as Record<string, any>)[select]
+                                const selectB = (b as Record<string, any>)[select]
+                                if (selectA < selectB) {
+                                    return -1
+                                } return 1
+                            }).map((item: Item) => (
+                                <p
+                                    key={item.id}
+                                >
+                                    {item.id}.
+                                    <Link className={cl.links} to={`/${item.id}`}>{item.title}</Link>
+                                    <RxCross2
+                                        className="removePostIcon"
+                                        onClick={() => handlePostRemove(item.id)}
+                                    /></p>
+                            )))
+                }
             </div>
-            <div>
-                <select name="sort" value={select} onChange={(event) => setSelect(event.target.value)}>
-                    <option value="" disabled>Отсортировать по...</option>
-                    <option value="">без сортировки</option>
-                    <option value="title">Заголовку</option>
-                    <option value="body">Сообщению</option>
-                </select>
-            </div>
-            {
-                loading ? <h1>Идет загрузка...</h1> :
-                    error ? <h1>{error}</h1> : (
-                        items.filter(item => item.title.includes(search)).sort((a: Item, b: Item) => {
-                            const selectA = (a as Record<string, any>)[select]
-                            const selectB = (b as Record<string, any>)[select]
-                            if (selectA < selectB) {
-                                return -1
-                            } return 1
-                        }).map((item: Item) => (
-                            <p
-                                key={item.id}
-                            >
-                                {item.id}.
-                                <Link className={ cl.links } to={`/${item.id}`}>{item.title}</Link>
-                                <RxCross2
-                                    className="removePostIcon"
-                                    onClick={() => handlePostRemove(item.id)}
-                                /></p>
-                        )))
-            }
             <div style={{ display: "flex" }}>
                 {pages.map(p => (
                     <div

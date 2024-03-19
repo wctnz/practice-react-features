@@ -39,4 +39,5 @@
   background-color: var(--background-color);
   color: var(--color);
   width: 100vw;
+  padding: 10px 0 0px 30px;
 }
